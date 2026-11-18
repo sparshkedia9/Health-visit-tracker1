@@ -59,17 +59,47 @@ function showMessage(msg) {
   alert(msg);
 }
 
-// Export to window for other scripts
-window.common = {
-  loadHouseholds,
-  saveHouseholds,
-  loadVisits,
-  saveVisits,
-  generateId,
-  formatId,
-  formatDate,
-  showMessage,
-};
+// Data migration: convert old complex IDs to simple numeric IDs if present
+function migrateIds() {
+  let households = loadHouseholds();
+  let visits = loadVisits();
+  let changed = false;
+  const idMap = {};
+  // Reassign household IDs
+  households.forEach((hh, idx) => {
+    if (hh.id.includes('_')) {
+      const newId = (idx + 1).toString();
+      idMap[hh.id] = newId;
+      hh.id = newId;
+      changed = true;
+    }
+  });
+  // Update visits that reference old household IDs
+  visits.forEach(v => {
+    if (v.householdId && idMap[v.householdId]) {
+      v.householdId = idMap[v.householdId];
+      changed = true;
+    }
+    // Also migrate visit IDs themselves if they are complex
+    if (v.id && v.id.includes('_')) {
+      // assign a new sequential numeric ID based on current max
+      const maxId = Math.max(0, ...visits.map(v2 => parseInt(v2.id) || 0));
+      v.id = (maxId + 1).toString();
+      changed = true;
+    }
+  });
+  if (changed) {
+    saveHouseholds(households);
+    saveVisits(visits);
+    // Reset counters so new IDs continue sequentially
+    localStorage.setItem('hwvt_HH_counter', households.length.toString());
+    localStorage.setItem('hwvt_VT_counter', visits.length.toString());
+  }
+}
+
+// Run migration on script load
+migrateIds();
+
 
 
 
