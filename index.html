@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Health Worker Visit Tracker - Dashboard</title>
+  <link rel="stylesheet" href="./css/style.css" />
+</head>
+<body>
+  <header>
+    <nav>
+      <a href="index.html" class="active">Dashboard</a>
+      <a href="households.html">Households</a>
+      <a href="visits.html">Visits</a>
+      <a href="followups.html">Follow‑ups</a>
+      <a href="reports.html">Reports</a>
+    </nav>
+  </header>
+  <div class="main-container">
+    <div class="hero">
+      <h1>Health Worker Visit Tracker</h1>
+      <p>Manage households, schedule visits and track follow‑ups.</p>
+    </div>
+    <h1>Dashboard</h1>
+    <div class="stats-grid" id="stats-grid">
+      <div class="card" id="total-households"><p>Loading...</p></div>
+      <div class="card" id="total-visits"><p>Loading...</p></div>
+      <div class="card" id="completed-visits"><p>Loading...</p></div>
+      <div class="card" id="pending-visits"><p>Loading...</p></div>
+      <div class="card" id="upcoming-visits"><p>Loading...</p></div>
+    </div>
+    <div class="card" id="recent-activities">
+      <h2>Recent Activities</h2>
+      <ul id="activity-list"></ul>
+    </div>
+  </div>
+  <script src="./js/common.js"></script>
+  <script src="./js/dashboard.js"></script>
+</body>
+</html>
