@@ -31,7 +31,8 @@ function generateId(prefix) {
 
 // Format ID for display (currently just returns the ID)
 function formatId(id) {
-  return id;
+  const parts = id.split('_');
+  return parts[parts.length - 1];
 }
 
 // ---------- Navigation ----------
