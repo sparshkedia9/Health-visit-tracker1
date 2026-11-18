@@ -1,7 +1,7 @@
 // visits.js - manage visit scheduling
 
 window.addEventListener('DOMContentLoaded', () => {
-  const { loadHouseholds, loadVisits, saveVisits, generateId, showMessage } = window.common;
+  const { loadHouseholds, loadVisits, saveVisits, generateId, formatId, showMessage } = window.common;
   let households = loadHouseholds();
   let visits = loadVisits();
 
@@ -24,7 +24,7 @@ window.addEventListener('DOMContentLoaded', () => {
     households.forEach(h => {
       const opt = document.createElement('option');
       opt.value = h.id;
-      opt.textContent = `${h.headName} (${h.id})`;
+      opt.textContent = `${h.headName} (${formatId(h.id)})`;
       householdSelect.appendChild(opt);
     });
   }
@@ -55,7 +55,7 @@ window.addEventListener('DOMContentLoaded', () => {
         const hhName = hh ? hh.headName : v.householdId;
         const tr = document.createElement('tr');
         tr.innerHTML = `
-          <td>${v.id}</td>
+          <td>${formatId(v.id)}</td>
           <td>${hhName}</td>
           <td>${v.date}</td>
           <td>${v.purpose}</td>

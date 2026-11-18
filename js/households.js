@@ -1,7 +1,7 @@
 // households.js - manage household records
 
 window.addEventListener('DOMContentLoaded', () => {
-  const { loadHouseholds, saveHouseholds, generateId, showMessage } = window.common;
+  const { loadHouseholds, saveHouseholds, generateId, formatId, showMessage } = window.common;
 
   let households = loadHouseholds();
 
