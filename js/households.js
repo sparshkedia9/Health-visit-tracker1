@@ -53,7 +53,7 @@ window.addEventListener('DOMContentLoaded', () => {
       filtered.forEach(h => {
         const tr = document.createElement('tr');
         tr.innerHTML = `
-          <td>${h.id}</td>
+          <td>${formatId(h.id)}</td>
           <td>${h.headName}</td>
           <td>${h.contact}</td>
           <td>${h.address}</td>
